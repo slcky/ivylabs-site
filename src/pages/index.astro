@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Values from '../components/Values.astro';
+import Pricing from '../components/Pricing.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout>
+  <Nav />
+  <Hero />
+  <Values />
+  <Pricing />
+  <CTA />
+  <Footer />
+</Layout>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Animated chat sequence ----
+  const chat = document.getElementById('chat');
+  const convo = [
+    { who: 'in',  text: "Hi! I saw your missed call — this is the assistant for Joe's Plumbing. How can I help?", t: '9:42pm' },
+    { who: 'you', text: "Need someone for a leak tomorrow morning", t: '9:42pm' },
+    { who: 'in',  text: "Got it! I have 8am or 10am open tomorrow. Which works?", t: '9:42pm' },
+    { who: 'you', text: "8am is perfect", t: '9:43pm' },
+    { who: 'in',  text: "You're booked for 8am ✅ I'll send a reminder. Talk soon!", t: '9:43pm' },
+  ];
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  function bubble(step) {
+    const d = document.createElement('div');
+    d.className = 'msg' + (step.who === 'you' ? ' you' : '');
+    d.innerHTML = step.text + '<small>' + step.t + '</small>';
+    chat.appendChild(d);
+  }
+  function typing(who) {
+    const d = document.createElement('div');
+    d.className = 'typing' + (who === 'you' ? ' you' : '');
+    d.innerHTML = '<i></i><i></i><i></i>';
+    chat.appendChild(d);
+    return d;
+  }
+  async function play() {
+    if (!chat) return;
+    chat.innerHTML = '';
+    if (reduce) { convo.forEach(bubble); return; }
+    for (const step of convo) {
+      const t = typing(step.who);
+      await wait(step.who === 'you' ? 650 : 1050);
+      t.remove();
+      bubble(step);
+      await wait(700);
+    }
+    await wait(2600);
+    play();
+  }
+  play();
+
+  // ---- Scroll reveals ----
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // ---- Count-up stat ----
+  document.querySelectorAll('[data-count]').forEach((el) => {
+    const target = +el.dataset.count;
+    if (reduce) { el.textContent = String(target); return; }
+    const cio = new IntersectionObserver((ents) => {
+      ents.forEach((ent) => {
+        if (ent.isIntersecting) {
+          let n = 0;
+          const step = Math.max(1, Math.round(target / 40));
+          const iv = setInterval(() => { n += step; if (n >= target) { n = target; clearInterval(iv); } el.textContent = String(n); }, 28);
+          cio.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    cio.observe(el);
+  });
+</script>

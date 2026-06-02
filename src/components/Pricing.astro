@@ -1,0 +1,35 @@
+---
+const tiers = [
+  {
+    name: 'Core', price: '$597', featured: false, cls: 'd1',
+    features: ['Missed-call text-back', 'All your leads in one inbox', 'Automatic follow-up', 'Online booking calendar', 'Review requests'],
+    cta: 'Get started', btn: 'btn btn-soft',
+  },
+  {
+    name: 'Growth', price: '$997', featured: true, cls: 'd2',
+    features: ['Everything in Core', '24/7 AI receptionist', 'Instagram & Facebook DMs', 'Smart nurture sequences', 'Monthly results report'],
+    cta: 'Book a call', btn: 'btn',
+  },
+  {
+    name: 'Full Suite', price: '$1,497', featured: false, cls: 'd3',
+    features: ['Everything in Growth', 'Outbound AI calling', 'Fully branded reviews', 'Multiple locations', 'Strategy call + priority help'],
+    cta: 'Get started', btn: 'btn btn-soft',
+  },
+];
+---
+<section class="section pricing" id="pricing">
+  <div class="wrap">
+    <div class="shead reveal"><h2>Fair pricing. Pick what fits.</h2><p>Start with the essentials or get the whole system. No surprises.</p></div>
+    <div class="tiers">
+      {tiers.map((t) => (
+        <div class={`tier reveal ${t.cls}${t.featured ? ' feat' : ''}`}>
+          {t.featured && <span class="tag">Most popular</span>}
+          <div class="tname">{t.name}</div>
+          <div class="price">{t.price}<span>/mo</span></div>
+          <ul>{t.features.map((f) => <li>{f}</li>)}</ul>
+          <a href="#contact" class={t.btn}>{t.cta}</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
