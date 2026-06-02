@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ivy Labs — Mainstreet Pro</title>
+<title>Ivy Labs — Mainstreet Pro (animated)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,18 +33,27 @@
   .hero{padding:64px 0 80px}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
   .pill{display:inline-flex;align-items:center;gap:8px;background:var(--amber-soft);color:#9a6a12;font-weight:700;font-size:13px;padding:8px 15px;border-radius:30px;margin-bottom:22px}
+  .pill .live{width:8px;height:8px;border-radius:50%;background:#e0941f;animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,148,31,.6)}70%{box-shadow:0 0 0 8px rgba(224,148,31,0)}100%{box-shadow:0 0 0 0 rgba(224,148,31,0)}}
   .hero h1{font-size:58px;margin-bottom:22px}
-  .hero h1 .u{color:var(--green);position:relative}
+  .hero h1 .u{color:var(--green)}
   .hero p{font-size:19px;color:var(--muted);margin-bottom:32px;max-width:500px}
   .hero-cta{display:flex;gap:13px;align-items:center;flex-wrap:wrap}
   .hero-note{font-size:14px;color:var(--muted);margin-top:18px}
   .hero-note b{color:var(--green)}
-  /* illustration card */
+
   .panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:0 30px 60px -34px rgba(30,122,77,.35)}
-  .phone{background:var(--green-soft);border-radius:18px;padding:20px}
-  .msg{background:#fff;border-radius:14px 14px 14px 4px;padding:13px 16px;font-size:14px;margin-bottom:10px;max-width:85%;box-shadow:0 4px 12px -6px rgba(0,0,0,.12)}
-  .msg.you{background:var(--green);color:#fff;border-radius:14px 14px 4px 14px;margin-left:auto}
+  .phone{background:var(--green-soft);border-radius:18px;padding:20px;min-height:248px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+  .msg{background:#fff;border-radius:14px 14px 14px 4px;padding:13px 16px;font-size:14px;max-width:85%;box-shadow:0 4px 12px -6px rgba(0,0,0,.12);opacity:0;transform:translateY(10px) scale(.96);animation:pop .45s cubic-bezier(.2,.8,.2,1) forwards}
+  .msg.you{background:var(--green);color:#fff;border-radius:14px 14px 4px 14px;margin-left:auto;align-self:flex-end}
   .msg small{display:block;font-size:11px;opacity:.6;margin-top:3px}
+  @keyframes pop{to{opacity:1;transform:translateY(0) scale(1)}}
+  .typing{background:#fff;border-radius:14px;padding:14px 16px;width:60px;display:flex;gap:5px;box-shadow:0 4px 12px -6px rgba(0,0,0,.12);opacity:0;animation:pop .3s forwards}
+  .typing.you{margin-left:auto;background:var(--green)}
+  .typing i{width:7px;height:7px;border-radius:50%;background:#9bb0a4;animation:blink 1.2s infinite}
+  .typing.you i{background:rgba(255,255,255,.7)}
+  .typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
   .stat-row{display:flex;gap:12px;margin-top:18px}
   .stat{flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
   .stat .n{font-size:24px;font-weight:800;color:var(--green)}
@@ -58,7 +67,8 @@
   .shead h2{font-size:40px;margin-bottom:14px}
   .shead p{color:var(--muted);font-size:18px}
   .vals{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .val{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;text-align:center}
+  .val{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;text-align:center;transition:.22s}
+  .val:hover{transform:translateY(-6px);box-shadow:0 24px 44px -28px rgba(30,122,77,.4);border-color:#cfe3d6}
   .val .ic{width:60px;height:60px;border-radius:18px;background:var(--green-soft);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 18px}
   .val:nth-child(2) .ic{background:var(--amber-soft)}
   .val h3{font-size:20px;margin-bottom:9px}
@@ -66,7 +76,8 @@
 
   .pricing{background:var(--green-soft)}
   .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
-  .tier{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px 28px}
+  .tier{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px 28px;transition:.22s}
+  .tier:hover{transform:translateY(-5px);box-shadow:0 26px 50px -30px rgba(30,122,77,.4)}
   .tier.feat{border:2px solid var(--green);box-shadow:0 26px 50px -28px rgba(30,122,77,.5);position:relative}
   .tier .tag{position:absolute;top:-13px;left:24px;background:var(--amber);color:#3a2806;font-size:12px;font-weight:800;padding:5px 14px;border-radius:20px}
   .tier .tname{font-size:19px;font-weight:800;color:var(--green-d);margin-bottom:6px}
@@ -79,12 +90,25 @@
 
   .cta{text-align:center;padding:90px 0}
   .cta-box{background:var(--green);border-radius:30px;padding:64px 30px;color:#fff;position:relative;overflow:hidden}
-  .cta-box h2{font-size:44px;margin-bottom:16px}
-  .cta-box p{font-size:19px;opacity:.85;margin-bottom:30px;max-width:520px;margin-left:auto;margin-right:auto}
+  .cta-box:after{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(240,163,53,.3),transparent 70%);top:-160px;right:-80px}
+  .cta-box h2{font-size:44px;margin-bottom:16px;position:relative}
+  .cta-box p{font-size:19px;opacity:.9;margin-bottom:30px;max-width:520px;margin:0 auto 30px;position:relative}
+  .cta-box .btn{position:relative}
 
   footer{padding:42px 0;font-size:14px;color:var(--muted)}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
   @media(max-width:880px){.hero-grid,.vals,.tiers{grid-template-columns:1fr}.hero h1{font-size:42px}.navlinks{display:none}}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    .msg,.typing{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
@@ -99,7 +123,7 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="pill">🌿 Built for local service businesses</span>
+      <span class="pill"><span class="live"></span> Built for local service businesses</span>
       <h1>Never miss <span class="u">another customer.</span></h1>
       <p>Your phone rings while you're on a job — and that call goes to a competitor. Ivy Labs puts an AI receptionist on your team that answers, books, and follows up 24/7.</p>
       <div class="hero-cta">
@@ -109,14 +133,10 @@
       <div class="hero-note">No long contracts. <b>Founding-client spots open now.</b></div>
     </div>
     <div class="panel">
-      <div class="phone">
-        <div class="msg">Hi! I saw your missed call — this is the AI assistant for Joe's Plumbing. How can I help? <small>Auto-reply · 9:42pm</small></div>
-        <div class="msg you">Need someone for a leak tomorrow morning <small>9:42pm</small></div>
-        <div class="msg">Got it! I have 8am or 10am open tomorrow. Which works? <small>9:42pm</small></div>
-      </div>
+      <div class="phone" id="chat"></div>
       <div class="stat-row">
         <div class="stat"><div class="n">24/7</div><div class="l">Always answers</div></div>
-        <div class="stat"><div class="n">+38%</div><div class="l">More jobs booked</div></div>
+        <div class="stat"><div class="n"><span data-count="38">0</span>%</div><div class="l">More jobs booked</div></div>
       </div>
     </div>
   </div>
@@ -126,33 +146,33 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="shead"><h2>We handle the busywork. You handle the jobs.</h2><p>Three simple systems that turn missed opportunities into booked revenue.</p></div>
+    <div class="shead reveal"><h2>We handle the busywork. You handle the jobs.</h2><p>Three simple systems that turn missed opportunities into booked revenue.</p></div>
     <div class="vals">
-      <div class="val"><div class="ic">📞</div><h3>Answer every call</h3><p>A friendly AI receptionist answers, qualifies, and books appointments — even nights and weekends.</p></div>
-      <div class="val"><div class="ic">⚡</div><h3>Follow up fast</h3><p>Every lead gets an instant text back and gentle reminders until they're on your calendar.</p></div>
-      <div class="val"><div class="ic">⭐</div><h3>Grow your reviews</h3><p>Happy customers get a friendly nudge to leave a review, building the reputation that wins you more work.</p></div>
+      <div class="val reveal d1"><div class="ic">📞</div><h3>Answer every call</h3><p>A friendly AI receptionist answers, qualifies, and books appointments — even nights and weekends.</p></div>
+      <div class="val reveal d2"><div class="ic">⚡</div><h3>Follow up fast</h3><p>Every lead gets an instant text back and gentle reminders until they're on your calendar.</p></div>
+      <div class="val reveal d3"><div class="ic">⭐</div><h3>Grow your reviews</h3><p>Happy customers get a friendly nudge to leave a review, building the reputation that wins you more work.</p></div>
     </div>
   </div>
 </section>
 
 <section class="section pricing">
   <div class="wrap">
-    <div class="shead"><h2>Fair pricing. Pick what fits.</h2><p>Start with the essentials or get the whole system. No surprises.</p></div>
+    <div class="shead reveal"><h2>Fair pricing. Pick what fits.</h2><p>Start with the essentials or get the whole system. No surprises.</p></div>
     <div class="tiers">
-      <div class="tier">
+      <div class="tier reveal d1">
         <div class="tname">Core</div>
         <div class="price">$597<span>/mo</span></div>
         <ul><li>Missed-call text-back</li><li>All your leads in one inbox</li><li>Automatic follow-up</li><li>Online booking calendar</li><li>Review requests</li></ul>
         <a href="#" class="btn btn-soft">Get started</a>
       </div>
-      <div class="tier feat">
+      <div class="tier feat reveal d2">
         <span class="tag">Most popular</span>
         <div class="tname">Growth</div>
         <div class="price">$997<span>/mo</span></div>
         <ul><li>Everything in Core</li><li>24/7 AI receptionist</li><li>Instagram & Facebook DMs</li><li>Smart nurture sequences</li><li>Monthly results report</li></ul>
         <a href="#" class="btn">Book a call</a>
       </div>
-      <div class="tier">
+      <div class="tier reveal d3">
         <div class="tname">Full Suite</div>
         <div class="price">$1,497<span>/mo</span></div>
         <ul><li>Everything in Growth</li><li>Outbound AI calling</li><li>Fully branded reviews</li><li>Multiple locations</li><li>Strategy call + priority help</li></ul>
@@ -164,7 +184,7 @@
 
 <section class="cta">
   <div class="wrap">
-    <div class="cta-box">
+    <div class="cta-box reveal">
       <h2>Let's get you more jobs.</h2>
       <p>Book a free 20-minute call. We'll show you exactly how much those missed calls are costing — and how to stop it.</p>
       <a href="#" class="btn btn-amber">Book a free strategy call</a>
@@ -173,5 +193,69 @@
 </section>
 
 <footer><div class="wrap"><div class="logo">🌿 Ivy Labs</div><div>© 2026 Ivy Labs — AI automation for local service businesses</div></div></footer>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Animated chat sequence ----
+  const chat = document.getElementById('chat');
+  const script = [
+    {who:'in',  text:"Hi! I saw your missed call — this is the assistant for Joe's Plumbing. How can I help?", t:'9:42pm'},
+    {who:'you', text:"Need someone for a leak tomorrow morning", t:'9:42pm'},
+    {who:'in',  text:"Got it! I have 8am or 10am open tomorrow. Which works?", t:'9:42pm'},
+    {who:'you', text:"8am is perfect", t:'9:43pm'},
+    {who:'in',  text:"You're booked for 8am ✅ I'll send a reminder. Talk soon!", t:'9:43pm'},
+  ];
+  const wait = ms => new Promise(r=>setTimeout(r,ms));
+  function bubble(step){
+    const d=document.createElement('div');
+    d.className='msg'+(step.who==='you'?' you':'');
+    d.innerHTML=step.text+'<small>'+step.t+'</small>';
+    chat.appendChild(d);
+  }
+  function typing(who){
+    const d=document.createElement('div');
+    d.className='typing'+(who==='you'?' you':'');
+    d.innerHTML='<i></i><i></i><i></i>';
+    chat.appendChild(d);
+    return d;
+  }
+  async function play(){
+    chat.innerHTML='';
+    if(reduce){ script.forEach(bubble); return; }
+    for(const step of script){
+      const t=typing(step.who);
+      await wait(step.who==='you'?650:1050);
+      t.remove();
+      bubble(step);
+      await wait(700);
+    }
+    await wait(2600);
+    play(); // loop the demo
+  }
+  play();
+
+  // ---- Scroll reveals ----
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ---- Count-up stat ----
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=+el.dataset.count;
+    if(reduce){ el.textContent=target; return; }
+    const cio=new IntersectionObserver((ents)=>{
+      ents.forEach(ent=>{
+        if(ent.isIntersecting){
+          let n=0; const step=Math.max(1,Math.round(target/40));
+          const iv=setInterval(()=>{ n+=step; if(n>=target){n=target;clearInterval(iv);} el.textContent=n; },28);
+          cio.unobserve(el);
+        }
+      });
+    },{threshold:.5});
+    cio.observe(el);
+  });
+</script>
 </body>
 </html>
