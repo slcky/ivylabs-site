@@ -29,17 +29,20 @@ import Footer from '../components/Footer.astro';
     { who: 'in',  text: "You're booked for 8am ✅ I'll send a reminder. Talk soon!", t: '9:43pm' },
   ];
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  function scrollDown() { if (chat) chat.scrollTop = chat.scrollHeight; }
   function bubble(step) {
     const d = document.createElement('div');
     d.className = 'msg' + (step.who === 'you' ? ' you' : '');
     d.innerHTML = step.text + '<small>' + step.t + '</small>';
     chat.appendChild(d);
+    scrollDown();
   }
   function typing(who) {
     const d = document.createElement('div');
     d.className = 'typing' + (who === 'you' ? ' you' : '');
     d.innerHTML = '<i></i><i></i><i></i>';
     chat.appendChild(d);
+    scrollDown();
     return d;
   }
   async function play() {
