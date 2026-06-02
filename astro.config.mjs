@@ -1,12 +1,13 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// Deployed to GitHub Pages at https://slcky.github.io/ivylabs-site/
-// When we move to Vercel + ivylabs.ai, set site to the real domain and remove `base`.
+// Two deploy targets:
+//   • Vercel / ivylabs.ai (default) — serves at the domain root, builds to dist/
+//   • GitHub Pages preview          — served under /ivylabs-site/, builds to docs/
+// The Pages preview build sets DEPLOY_TARGET=pages (see `npm run build:pages`).
+const PAGES = process.env.DEPLOY_TARGET === 'pages';
+
 export default defineConfig({
-  site: 'https://slcky.github.io',
-  base: '/ivylabs-site',
-  // Build into /docs so GitHub Pages can serve it from the main branch
-  // with no extra permissions. (On Vercel later this is irrelevant.)
-  outDir: './docs',
+  site: PAGES ? 'https://slcky.github.io' : 'https://ivylabs.ai',
+  ...(PAGES ? { base: '/ivylabs-site', outDir: './docs' } : {}),
 });
