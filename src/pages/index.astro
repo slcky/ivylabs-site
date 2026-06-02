@@ -49,13 +49,9 @@ import Footer from '../components/Footer.astro';
     // Reduce-motion users get a calmer version: messages still appear in
     // sequence, but without the typing flourish and without looping.
     for (const step of convo) {
-      if (!reduce) {
-        const t = typing(step.who);
-        await wait(step.who === 'you' ? 650 : 1050);
-        t.remove();
-      } else {
-        await wait(step.who === 'you' ? 500 : 850);
-      }
+      const t = typing(step.who);
+      await wait(step.who === 'you' ? 650 : 1050);
+      t.remove();
       bubble(step);
       await wait(700);
     }

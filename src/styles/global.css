@@ -95,7 +95,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 @media(max-width:880px){.hero-grid,.vals,.tiers{grid-template-columns:1fr}.hero h1{font-size:42px}.navlinks{display:none}}
 @media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .reveal{opacity:1;transform:none}
-  .msg,.typing{opacity:1;transform:none}
+  /* Decorative motion is disabled; the hero chat demo stays animated because
+     it is core content (a product demo), not decoration. */
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .pill .live{animation:none!important}
+  .val:hover,.tier:hover,.btn:hover{transform:none!important}
 }
