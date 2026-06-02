@@ -1,0 +1,65 @@
+---
+---
+<section class="section" id="roi">
+  <div class="wrap">
+    <div class="shead reveal"><h2>What are missed calls costing you?</h2><p>Drag the sliders. Most local businesses are shocked by the number.</p></div>
+    <div class="calc reveal reveal-scale">
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label>Calls you miss per week <span class="v" id="calls-v">12</span></label>
+          <input type="range" id="calls" min="1" max="50" value="12" />
+        </div>
+        <div class="calc-field">
+          <label>Average job value <span class="v" id="value-v">$350</span></label>
+          <input type="range" id="value" min="50" max="2000" step="50" value="350" />
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="lbl">You're leaving roughly</div>
+        <div class="big" id="calc-out">$0</div>
+        <div class="sub">on the table every month — about <b id="calc-year">$0</b>/year walking to your competitors. <em>(Assuming you'd win half the calls you currently miss.)</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const calls = document.getElementById('calls');
+  const value = document.getElementById('value');
+  const callsV = document.getElementById('calls-v');
+  const valueV = document.getElementById('value-v');
+  const out = document.getElementById('calc-out');
+  const year = document.getElementById('calc-year');
+  const money = (n) => '$' + Math.round(n).toLocaleString('en-US');
+
+  let raf = null;
+  function render(animate) {
+    const c = +calls.value, v = +value.value;
+    callsV.textContent = c;
+    valueV.textContent = money(v);
+    const monthly = c * 4.33 * v * 0.5; // recover half the missed calls
+    year.textContent = money(monthly * 12);
+    const from = parseInt((out.textContent || '0').replace(/[^0-9]/g, '')) || 0;
+    if (!animate || reduce) { out.textContent = money(monthly); return; }
+    const start = performance.now(), dur = 500;
+    if (raf) cancelAnimationFrame(raf);
+    const tick = (t) => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      out.textContent = money(from + (monthly - from) * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+  }
+  if (calls && value) {
+    calls.addEventListener('input', () => render(true));
+    value.addEventListener('input', () => render(true));
+    // animate up the first time it scrolls into view
+    const io = new IntersectionObserver((e) => {
+      e.forEach((x) => { if (x.isIntersecting) { render(true); io.disconnect(); } });
+    }, { threshold: 0.4 });
+    io.observe(out);
+    render(false);
+  }
+</script>

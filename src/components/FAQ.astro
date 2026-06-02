@@ -1,0 +1,38 @@
+---
+const faqs = [
+  { q: 'Do I need to be technical?', a: "Not at all. This is fully done-for-you — we set up, brand, and manage everything. You never touch a dashboard unless you want to." },
+  { q: 'How fast can it be set up?', a: "Days, not months. Once we've had our call and gathered a few details about your business, we build and launch your system quickly." },
+  { q: 'Will the AI sound robotic to my customers?', a: "No. The AI receptionist is natural and trained on your business — your services, your hours, your voice. Most callers don't realize it's automated." },
+  { q: 'Is this only for big companies?', a: "The opposite. Ivy Labs is built specifically for local service businesses — HVAC, plumbing, salons, home services, dental, landscaping, and the like." },
+  { q: "What if it doesn't work for my business?", a: "No long-term contracts and you can cancel anytime. We'd rather earn your business every month than lock you in." },
+];
+---
+<section class="section pricing" id="faq">
+  <div class="wrap">
+    <div class="shead reveal"><h2>Questions, answered.</h2><p>Everything you're probably wondering before that first call.</p></div>
+    <div class="faq">
+      {faqs.map((f) => (
+        <div class="faq-item reveal">
+          <div class="faq-q">{f.q}<span class="chev">+</span></div>
+          <div class="faq-a"><p>{f.a}</p></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // close any other open item for a clean accordion
+      document.querySelectorAll('.faq-item.open').forEach((other) => {
+        if (other !== item) { other.classList.remove('open'); other.querySelector('.faq-a').style.maxHeight = null; }
+      });
+      if (isOpen) { item.classList.remove('open'); a.style.maxHeight = null; }
+      else { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+</script>
