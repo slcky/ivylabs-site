@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ivy Labs — Cultivated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#14402b; --green-2:#1d5a3c; --moss:#3a7d5a;
+    --cream:#f6f2e9; --cream-2:#efe9da; --ink:#1c2620; --muted:#5c6b62;
+    --gold:#c9a86a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:500;line-height:1.1}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+  a{text-decoration:none;color:inherit}
+  .btn{display:inline-block;background:var(--green);color:var(--cream);padding:15px 30px;border-radius:40px;font-weight:600;font-size:15px;transition:.2s;border:1px solid var(--green)}
+  .btn:hover{background:var(--green-2)}
+  .btn-ghost{background:transparent;color:var(--green);border:1px solid rgba(20,64,43,.25)}
+  .btn-ghost:hover{background:rgba(20,64,43,.06)}
+
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
+  .logo{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:8px}
+  .navlinks{display:flex;gap:34px;font-size:15px;color:var(--muted);font-weight:500}
+  .navlinks a:hover{color:var(--green)}
+
+  /* hero */
+  .hero{padding:70px 0 90px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  .eyebrow{display:inline-block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);font-weight:600;margin-bottom:22px}
+  .hero h1{font-size:62px;letter-spacing:-.02em;margin-bottom:24px}
+  .hero h1 em{font-style:italic;color:var(--green-2)}
+  .hero p{font-size:19px;color:var(--muted);max-width:520px;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .hero-art{aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--moss),var(--green) 70%);position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 30px 70px -30px rgba(20,64,43,.6)}
+  .hero-art .leaf{font-size:120px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.25))}
+  .hero-card{position:absolute;background:var(--cream);border-radius:16px;padding:16px 20px;box-shadow:0 18px 40px -18px rgba(0,0,0,.35);font-size:14px;font-weight:600}
+  .hero-card small{display:block;color:var(--muted);font-weight:500;font-size:12px}
+  .c1{top:14%;left:-26px}.c2{bottom:16%;right:-22px}
+
+  /* trust bar */
+  .trust{background:var(--green);color:var(--cream-2);padding:18px 0}
+  .trust .wrap{display:flex;gap:38px;justify-content:center;flex-wrap:wrap;font-size:14px;letter-spacing:.04em;opacity:.9}
+
+  /* value */
+  .section{padding:90px 0}
+  .shead{text-align:center;max-width:620px;margin:0 auto 56px}
+  .shead h2{font-size:42px;margin-bottom:16px;letter-spacing:-.01em}
+  .shead p{color:var(--muted);font-size:18px}
+  .vals{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .val{background:#fff;border:1px solid var(--cream-2);border-radius:20px;padding:34px}
+  .val .ic{width:48px;height:48px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px}
+  .val h3{font-size:22px;margin-bottom:10px}
+  .val p{color:var(--muted);font-size:15px}
+
+  /* pricing */
+  .pricing{background:var(--cream-2)}
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+  .tier{background:#fff;border-radius:22px;padding:36px 30px;border:1px solid #e4dcc9}
+  .tier.feat{background:var(--green);color:var(--cream);transform:scale(1.04);box-shadow:0 30px 60px -30px rgba(20,64,43,.55)}
+  .tier .tname{font-family:'Fraunces',serif;font-size:24px;margin-bottom:6px}
+  .tier .price{font-size:46px;font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em}
+  .tier .price span{font-size:16px;font-family:'Inter';color:var(--muted);font-weight:500}
+  .tier.feat .price span{color:rgba(246,242,233,.7)}
+  .tier .tag{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:600;margin-bottom:18px;display:block;height:14px}
+  .tier ul{list-style:none;margin:22px 0 28px}
+  .tier li{padding:9px 0;font-size:15px;border-top:1px solid rgba(0,0,0,.07);color:var(--muted)}
+  .tier.feat li{border-color:rgba(255,255,255,.12);color:var(--cream-2)}
+  .tier li:before{content:"🌿";margin-right:9px;font-size:12px}
+  .tier .btn{width:100%;text-align:center}
+  .tier.feat .btn{background:var(--cream);color:var(--green)}
+
+  /* cta */
+  .cta{text-align:center;padding:100px 0}
+  .cta h2{font-size:48px;margin-bottom:18px}
+  .cta p{color:var(--muted);font-size:19px;margin-bottom:32px}
+
+  footer{background:var(--green);color:var(--cream-2);padding:46px 0;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  @media(max-width:880px){.hero-grid,.vals,.tiers{grid-template-columns:1fr}.hero h1{font-size:44px}.tier.feat{transform:none}.navlinks{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="logo">🌿 Ivy Labs</div>
+    <div class="navlinks"><a href="#">Services</a><a href="#">Pricing</a><a href="#">Results</a><a href="#">About</a></div>
+    <a href="#" class="btn">Book a call</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">AI automation for local service businesses</span>
+      <h1>Grow your business <em>on autopilot.</em></h1>
+      <p>Ivy Labs builds the AI systems that answer every call, follow up with every lead, and book more jobs — so you never lose another customer to a missed call.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn">Book a free strategy call</a>
+        <a href="#" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div class="hero-art"><div class="leaf">🌿</div>
+        <div class="hero-card c1">+38% booked jobs<small>first 90 days</small></div>
+        <div class="hero-card c2">24/7 AI receptionist<small>never misses a call</small></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="trust"><div class="wrap"><span>HVAC</span><span>Plumbing</span><span>Salons & Spas</span><span>Home Services</span><span>Dental</span><span>Landscaping</span></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="shead"><h2>Every lead, captured and converted.</h2><p>Three things quietly cost local businesses the most revenue. We fix all three.</p></div>
+    <div class="vals">
+      <div class="val"><div class="ic">📞</div><h3>Never miss a lead</h3><p>Missed-call text-back and a 24/7 AI receptionist answer, qualify, and book while you're on the job.</p></div>
+      <div class="val"><div class="ic">⚡</div><h3>Follow up instantly</h3><p>Every inquiry gets an immediate, personal response and a smart nurture sequence until they book.</p></div>
+      <div class="val"><div class="ic">⭐</div><h3>Win more reviews</h3><p>Automated, compliant review requests build the 5-star reputation that wins local search.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section pricing">
+  <div class="wrap">
+    <div class="shead"><h2>Simple plans. Real ROI.</h2><p>Start with what you need. Bundle when you're ready to grow.</p></div>
+    <div class="tiers">
+      <div class="tier">
+        <span class="tag"></span>
+        <div class="tname">Core</div>
+        <div class="price">$597<span>/mo</span></div>
+        <ul><li>Missed-call text-back</li><li>Unified lead inbox</li><li>CRM + follow-up</li><li>Online booking</li><li>Review generation</li></ul>
+        <a href="#" class="btn btn-ghost">Get started</a>
+      </div>
+      <div class="tier feat">
+        <span class="tag">Most popular</span>
+        <div class="tname">Growth</div>
+        <div class="price">$997<span>/mo</span></div>
+        <ul><li>Everything in Core</li><li>24/7 AI receptionist</li><li>Social comment→DM</li><li>Advanced nurture</li><li>Monthly reporting</li></ul>
+        <a href="#" class="btn">Book a call</a>
+      </div>
+      <div class="tier">
+        <span class="tag"></span>
+        <div class="tname">Full Suite</div>
+        <div class="price">$1,497<span>/mo</span></div>
+        <ul><li>Everything in Growth</li><li>Outbound AI calling</li><li>White-label reviews</li><li>Multi-location</li><li>Strategy call + priority</li></ul>
+        <a href="#" class="btn btn-ghost">Get started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Ready to stop losing leads?</h2>
+    <p>Book a free 20-minute strategy call. We'll map the revenue you're leaving on the table.</p>
+    <a href="#" class="btn">Book a free strategy call</a>
+  </div>
+</section>
+
+<footer><div class="wrap"><div class="logo" style="color:var(--cream)">🌿 Ivy Labs</div><div>© 2026 Ivy Labs — AI automation for local service businesses</div></div></footer>
+</body>
+</html>

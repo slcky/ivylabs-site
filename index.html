@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ivy Labs — Brand Direction Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bar:#0d0f0e;--line:#272d2a;--gold:#d9b25e;--green:#1e7a4d;--text:#eef2ee;--muted:#8a978f}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#000;color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{background:var(--bar);border-bottom:1px solid var(--line);padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;min-height:64px}
+  .brand{font-family:'Space Grotesk';font-weight:700;font-size:18px;display:flex;align-items:center;gap:8px;margin-right:8px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+  .tab{font-family:'Space Grotesk';font-size:14px;font-weight:500;color:var(--muted);background:transparent;border:1px solid var(--line);padding:9px 16px;border-radius:8px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .tab:hover{color:var(--text);border-color:#3a423e}
+  .tab.active{color:#0c0f0d;background:var(--text);border-color:var(--text)}
+  .tab .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .d-cultivated{background:#1d5a3c}.d-signal{background:#9dff5b}.d-mainstreet{background:#f0a335}.d-onyx{background:var(--gold)}
+  .meta{font-size:12.5px;color:var(--muted);max-width:340px;line-height:1.4}
+  .meta b{color:var(--text);font-weight:600}
+  .open{font-family:'Space Grotesk';font-size:13px;color:var(--gold);border:1px solid var(--line);padding:8px 14px;border-radius:8px;text-decoration:none}
+  .open:hover{border-color:var(--gold)}
+  .frame-wrap{flex:1;position:relative;background:#000}
+  iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+  @media(max-width:760px){.meta{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🌿 Ivy Labs</div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-f="cultivated" data-d="Organic premium — leans into the ivy/growth metaphor. Warm, established, boutique."><span class="dot d-cultivated"></span>Cultivated</button>
+    <button class="tab" data-f="signal" data-d="Modern AI-tech — crisp, high-contrast, electric accent. Most premium/techy."><span class="dot d-signal"></span>Signal</button>
+    <button class="tab" data-f="mainstreet" data-d="Approachable trust — friendly, human, 'for businesses like yours'. Most approachable."><span class="dot d-mainstreet"></span>Mainstreet Pro</button>
+    <button class="tab" data-f="onyx-gold" data-d="Onyx & gold — luxe banking aesthetic (Robinhood Gold vibe). Highest-end premium."><span class="dot d-onyx"></span>Onyx &amp; Gold</button>
+  </div>
+  <div class="meta" id="meta"><b>Cultivated</b> — Organic premium. Leans into the ivy/growth metaphor.</div>
+  <a class="open" id="open" href="themes/cultivated.html" target="_blank">Open ↗</a>
+</header>
+<div class="frame-wrap"><iframe id="frame" src="themes/cultivated.html" title="theme preview"></iframe></div>
+<script>
+  const tabs=[...document.querySelectorAll('.tab')],frame=document.getElementById('frame'),meta=document.getElementById('meta'),open=document.getElementById('open');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');
+    const f=t.dataset.f;frame.src='themes/'+f+'.html';open.href='themes/'+f+'.html';
+    meta.innerHTML='<b>'+t.textContent.trim()+'</b> — '+t.dataset.d;
+  }));
+</script>
+</body>
+</html>
